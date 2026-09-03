@@ -1,0 +1,56 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Admin group documents
+    match /admins/{adminId} {
+      allow read: if true;
+      allow write: if true;
+      
+      match /students/{studentId} {
+        allow read: if true;
+        allow write: if true;
+      }
+      
+      match /expenses/{expenseId} {
+        allow read: if true;
+        allow write: if true;
+      }
+      
+      match /history/{recordId} {
+        allow read: if true;
+        allow write: if true;
+      }
+    }
+    
+    // Collection group match for students across all admins
+    match /{path=**}/students/{studentId} {
+      allow read: if true;
+      allow write: if true;
+    }
+    
+    // Fast student lookup directory collection
+    match /student_directory/{username} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Fast admin lookup directory collection
+    match /admin_directory/{emailOrUser} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Test connection document
+    match /test/{docId} {
+      allow read, write: if true;
+    }
+
+    // Default fallback
+    match /{document=**} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}
+
+

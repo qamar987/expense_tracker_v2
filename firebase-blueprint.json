@@ -1,0 +1,127 @@
+{
+  "entities": {
+    "AdminProfile": {
+      "title": "AdminProfile",
+      "description": "Admin group manager profile metadata",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "groupName": { "type": "string" },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["id", "name", "email"]
+    },
+    "Student": {
+      "title": "Student",
+      "description": "Student entity in a hostel/flatmate group",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentCustomId": { "type": "string" },
+        "name": { "type": "string" },
+        "username": { "type": "string" },
+        "password": { "type": "string" },
+        "balance": { "type": "number" },
+        "totalTopup": { "type": "number" },
+        "totalExpense": { "type": "number" },
+        "phone": { "type": "string" },
+        "roomNumber": { "type": "string" },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["id", "studentCustomId", "name", "username", "balance", "totalTopup", "totalExpense", "createdAt"]
+    },
+    "Expense": {
+      "title": "Expense",
+      "description": "Shared group expense record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "totalCost": { "type": "number" },
+        "perStudentShare": { "type": "number" },
+        "splitAmongStudentIds": { "type": "array" },
+        "category": { "type": "string" },
+        "date": { "type": "string" },
+        "notes": { "type": "string" },
+        "studentNames": { "type": "object" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["id", "name", "totalCost", "perStudentShare", "splitAmongStudentIds", "category", "date", "createdAt"]
+    },
+    "HistoryRecord": {
+      "title": "HistoryRecord",
+      "description": "Transaction audit log entry",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string", "enum": ["topup", "expense", "student_added", "expense_deleted"] },
+        "amount": { "type": "number" },
+        "description": { "type": "string" },
+        "studentIds": { "type": "array" },
+        "studentNames": { "type": "array" },
+        "timestamp": { "type": "number" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["id", "type", "amount", "description", "studentIds", "studentNames", "createdAt"]
+    },
+    "StudentLookup": {
+      "title": "StudentLookup",
+      "description": "Fast lookup index for student username authentication",
+      "type": "object",
+      "properties": {
+        "username": { "type": "string" },
+        "password": { "type": "string" },
+        "studentId": { "type": "string" },
+        "adminId": { "type": "string" },
+        "name": { "type": "string" },
+        "studentCustomId": { "type": "string" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["username", "password", "studentId", "adminId", "name"]
+    },
+    "AdminLookup": {
+      "title": "AdminLookup",
+      "description": "Fast lookup index for admin email directory fallback",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "password": { "type": "string" },
+        "adminId": { "type": "string" },
+        "name": { "type": "string" },
+        "groupName": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["email", "adminId", "name"]
+    }
+  },
+  "firestore": {
+    "/admins/{adminId}": {
+      "schema": "AdminProfile",
+      "description": "Admin profiles and group configurations"
+    },
+    "/admins/{adminId}/students/{studentId}": {
+      "schema": "Student",
+      "description": "Students enrolled in the group"
+    },
+    "/admins/{adminId}/expenses/{expenseId}": {
+      "schema": "Expense",
+      "description": "Shared group expenses"
+    },
+    "/admins/{adminId}/history/{recordId}": {
+      "schema": "HistoryRecord",
+      "description": "Chronological audit records"
+    },
+    "/student_directory/{username}": {
+      "schema": "StudentLookup",
+      "description": "Fast lookup index mapping student username to adminId & studentId"
+    },
+    "/admin_directory/{email}": {
+      "schema": "AdminLookup",
+      "description": "Fast lookup index mapping admin email to adminId"
+    }
+  }
+}
