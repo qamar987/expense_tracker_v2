@@ -43,6 +43,7 @@ import { AddStudentModal } from './components/modals/AddStudentModal';
 import { AddExpenseModal } from './components/modals/AddExpenseModal';
 import { TopUpModal } from './components/modals/TopUpModal';
 import { StudentDetailsModal } from './components/modals/StudentDetailsModal';
+import { Wallet, Sparkles } from 'lucide-react';
 
 export default function App() {
   const [authState, setAuthState] = useState<AuthState>(null);
@@ -323,12 +324,37 @@ export default function App() {
 
   if (loadingAuth) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-4 transition-colors">
-        <div className="text-center space-y-3">
-          <div className="h-10 w-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
-          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 tracking-wide uppercase">
-            Connecting to Firebase...
-          </p>
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center p-4 transition-colors relative overflow-hidden">
+        {/* Ambient background glow */}
+        <div className="absolute w-80 h-80 rounded-full bg-indigo-500/10 dark:bg-indigo-500/20 blur-3xl pointer-events-none -top-12 -left-12 animate-pulse"></div>
+        <div className="absolute w-80 h-80 rounded-full bg-violet-500/10 dark:bg-violet-500/20 blur-3xl pointer-events-none -bottom-12 -right-12 animate-pulse delay-500"></div>
+
+        <div className="relative text-center flex flex-col items-center space-y-4 max-w-sm w-full px-8 py-10 rounded-3xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800/80 shadow-2xl shadow-indigo-500/10">
+          {/* Glowing Animated Icon Badge */}
+          <div className="relative">
+            <div className="absolute -inset-2 rounded-2xl bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 opacity-60 blur-md animate-pulse"></div>
+            <div className="relative h-16 w-16 rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-700 text-white flex items-center justify-center shadow-lg shadow-indigo-500/30">
+              <Wallet className="h-8 w-8" />
+            </div>
+            <div className="absolute -bottom-1 -right-1 h-5 w-5 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-900 flex items-center justify-center shadow-sm">
+              <Sparkles className="h-2.5 w-2.5 text-white" />
+            </div>
+          </div>
+
+          {/* Title and Tagline */}
+          <div className="space-y-1.5">
+            <h1 className="text-3xl font-black tracking-tight bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 dark:from-indigo-400 dark:via-violet-300 dark:to-purple-300 bg-clip-text text-transparent">
+              My Spends
+            </h1>
+            <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 tracking-wider uppercase">
+              Smart Shared Balances & Expenses
+            </p>
+          </div>
+
+          {/* Smooth animated loader */}
+          <div className="w-40 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden relative">
+            <div className="h-full bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 rounded-full animate-pulse w-3/4 mx-auto"></div>
+          </div>
         </div>
       </div>
     );

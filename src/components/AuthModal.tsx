@@ -174,8 +174,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mx-auto mb-2.5 border border-white/20 shadow-inner">
             <ShieldCheck className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
           </div>
-          <h2 className="text-lg sm:text-xl font-extrabold tracking-tight">
-            Student Expense Tracker
+          <h2 className="text-xl sm:text-2xl font-black tracking-tight">
+            My Spends
           </h2>
           <p className="text-[11px] sm:text-xs text-indigo-100 mt-0.5">
             Group balance pooling, split calculations, & real-time alerts

@@ -73,7 +73,7 @@ export function exportHistoryPDF(options: {
   doc.setTextColor(255, 255, 255);
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(15);
-  doc.text('STUDENT EXPENSE TRACKER', 14, 12);
+  doc.text('MY SPENDS', 14, 12);
 
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(9);
@@ -264,7 +264,7 @@ export function exportHistoryPDF(options: {
       doc.setTextColor(148, 163, 184); // slate 400
 
       doc.text(
-        `Student Expense Tracker • ${groupName} • Confidential Audit Log`,
+        `My Spends • ${groupName} • Confidential Audit Log`,
         14,
         pageHeight - 8
       );

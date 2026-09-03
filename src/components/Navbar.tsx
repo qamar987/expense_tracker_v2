@@ -36,8 +36,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Wallet className="h-5 w-5" />
             </div>
             <div className="min-w-0 flex flex-col justify-center">
-              <span className="font-bold text-slate-900 dark:text-white tracking-tight text-sm sm:text-base leading-tight">
-                Expense Tracker
+              <span className="font-extrabold text-slate-900 dark:text-white tracking-tight text-sm sm:text-base leading-tight">
+                My Spends
               </span>
               {authState && (
                 <div className="flex items-center gap-1.5 mt-0.5">
