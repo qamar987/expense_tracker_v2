@@ -1,5 +1,5 @@
 {
-  "name": "Remix Expense Tracker",
+  "name": "My Spends",
   "description": "A full-stack expense and balance tracking system with admin management, split expense calculation, top-ups, and student view.",
   "requestFramePermissions": [],
   "majorCapabilities": [
